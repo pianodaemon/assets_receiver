@@ -1,0 +1,83 @@
+//======================================================================
+//  Company:
+//      Intel, GDC
+//
+//  Product:
+//      Helix AgentDaemon Application
+//      Copyright 2013 Intel, GDC
+//
+//  \brief
+//      Abstract StandAlone class implementation
+//
+//======================================================================
+
+#include "Helix/AbstractAppStandAlone.hpp"
+
+
+//!---------------------------------------------------------------------
+//! \brief
+//!     Class constructor.
+//!
+Helix::AbstractAppStandAlone::AbstractAppStandAlone( const char* name ) : m_applicationName( name )
+{
+
+}
+
+//!---------------------------------------------------------------------
+//! \brief
+//!     Class destructor.
+//!
+Helix::AbstractAppStandAlone::~AbstractAppStandAlone()
+{
+}
+
+
+const std::string Helix::AbstractAppStandAlone::getApplicationName()
+{
+    std::string name( this->m_applicationName );
+    return name;
+}
+
+
+//!---------------------------------------------------------------------
+//! \brief
+//!     Standardize the skeleton of an algorithm in a base class
+//!
+//! \return
+//!     If successful returns zero.
+//!
+int Helix::AbstractAppStandAlone::exec()
+{
+    int rc;
+
+    rc = this->runLogger();
+
+    if ( rc < HELIX_STANDALONE_EXEC_SUCCEED )
+    {
+        rc = HELIX_STANDALONE_CANT_RUN_LOGGER;
+    }
+    else
+    {
+
+        rc = this->validateParams();
+
+        if ( rc < HELIX_STANDALONE_EXEC_SUCCEED )
+        {
+            rc = HELIX_STANDALONE_START_BAD;
+        }
+        else
+        {
+
+            this->initSingletonEntities();
+
+            rc = this->start();
+   
+            if ( rc < HELIX_STANDALONE_EXEC_SUCCEED )
+            {
+                rc = HELIX_STANDALONE_START_BAD;
+            }
+        }
+    }
+
+    return rc;
+}

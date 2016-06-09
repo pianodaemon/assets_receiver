@@ -1,0 +1,141 @@
+//======================================================================
+//  Company:
+//      Maxima, Software
+//
+//  Product:
+//      Asset Receiver for Agnux ERP
+//      Copyright 2016
+//
+//  \brief
+//      Asset Receiver class implementation
+//
+//======================================================================
+
+
+#include "Helix/AgentAppStandAlone.hpp"
+#include "Helix/ClusterAPI.hpp"
+#include "Helix/loadPluginInceptors.hpp"
+#include "Util/DebugTracer.hpp"
+#include "SDU/Server.hpp"
+#include <cstdlib>
+#include <iostream>
+#include <unistd.h>
+
+#define LOG_CONFIG_FILE "logConfig.xml"
+
+//!---------------------------------------------------------------------
+//! \brief
+//!     Class constructor.
+//!
+Helix::AgentAppStandAlone::AgentAppStandAlone( const char* appName , int argc, char **argv ) : AbstractAppStandAlone( appName )
+{
+    this->m_argc = argc;
+    this->m_argv = argv;
+}
+
+
+//!---------------------------------------------------------------------
+//! \brief
+//!     Class destructor.
+//!
+Helix::AgentAppStandAlone::~AgentAppStandAlone()
+{   
+    DEBUG_TRACER_INFO( "Running AgentAppStandAlone destructor!." );
+}
+
+
+//!---------------------------------------------------------------------
+//!
+//! \brief
+//!      Init the logger Engine selected.
+//!
+//! \return
+//!     int.
+//!
+int Helix::AgentAppStandAlone::runLogger()
+{
+    int rc = HELIX_STANDALONE_EXEC_SUCCEED;
+
+    try
+    {
+        log4cxx::xml::DOMConfigurator::configure( LOG_CONFIG_FILE );
+    }
+    catch( const log4cxx::helpers::Exception &e )
+    {
+        rc = HELIX_STANDALONE_SYSTEM_ERROR;
+
+        std::cout << "Fail through the Initializing of Debug Tracer : " << e.what() << std::endl;
+    }
+
+    return rc;
+}
+
+
+//!---------------------------------------------------------------------
+//!
+//! \brief
+//!      Init all the Singleton entities
+//!
+//! \return
+//!     void.
+//!
+void Helix::AgentAppStandAlone::initSingletonEntities()
+{
+    loadPluginInceptors( SDU::PluginManager::getInstance() );
+    ClusterAPI::getInstance();
+}
+
+
+//!---------------------------------------------------------------------
+//!
+//! \brief
+//!      Validate the command line params.
+//!
+//! \return
+//!     int.
+//!
+int Helix::AgentAppStandAlone::validateParams()
+{
+    int rc = HELIX_STANDALONE_EXEC_SUCCEED;
+
+    if ( this->m_argc < 2 )
+    {
+        std::cerr << "Usage: " << this->getApplicationName() << " <port>" << std::endl;
+
+        rc = HELIX_STANDALONE_WITHOUT_ENOUGH_ARGS;
+    }
+    
+    return rc;
+}
+
+
+//!---------------------------------------------------------------------
+//!
+//! \brief
+//!      Execute Application in standalone mode
+//!
+//! \return
+//!     int.
+//!
+int Helix::AgentAppStandAlone::start()
+{
+    int rc = HELIX_STANDALONE_EXEC_SUCCEED;
+
+    DEBUG_TRACER_INFO( "Starting " << this->getApplicationName() );
+
+    std::string owner = "VCO Client library";
+
+    int portServer = std::atoi( this->m_argv[1] );
+    
+    do
+    {
+
+        startHelixSocketServer( portServer , owner , NULL );
+
+        sleep( 5 );
+
+    } while ( true );
+
+
+    return rc;
+}
