@@ -41,8 +41,8 @@ class app_stand_alone
         //!      Standardize the skeleton of an algorithm in a 
         //!      base class.
         //!
-        //! \return AbstractAppStandAlone
-        //!     If successful returns zero.
+        //! \return
+        //!     int
         //!
         int exec();
 
@@ -54,7 +54,7 @@ class app_stand_alone
         //!      Init the logger Engine selected
         //!
         //! \return
-        //!     int.
+        //!     int
         //!
         virtual int run_logger() = 0;
 
@@ -64,7 +64,7 @@ class app_stand_alone
         //!      Validate the command line params.
         //!
         //! \return
-        //!     int.
+        //!     int
         //!
         virtual int validate_params() = 0;
 
@@ -74,7 +74,7 @@ class app_stand_alone
         //!      Execute Application in standalone mode
         //!
         //! \return
-        //!     int.
+        //!     int
         //!
         virtual int start() = 0;
 
