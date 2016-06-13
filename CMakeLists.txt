@@ -19,6 +19,7 @@ SET( CPP
     ${SOURCE_PATH}/main.cpp
     ${SOURCE_PATH}/skel/app_stand_alone.cpp
     ${SOURCE_PATH}/ar/assets_receiver.cpp
+    ${SOURCE_PATH}/util/str_ascii_helper.cpp
     #${SOURCE_PATH}/term-ui/env_reader.cpp
 )
 
@@ -35,4 +36,7 @@ TARGET_LINK_LIBRARIES(
     ${EXE}
     log4cxx
     ncurses
+    panel
+    menu
+    form
 )

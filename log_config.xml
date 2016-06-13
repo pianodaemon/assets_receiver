@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+   <appender name="appxRollingAppenderDaily" class="org.apache.log4j.RollingFileAppender">
+
+	<param name="ImmediateFlush" value="true" />
+
+	<layout class="org.apache.log4j.xml.XMLLayout">
+            <param name="properties" value="true" />
+            <param name="locationinfo" value="true" />
+        </layout>
+               
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="FileNamePattern" value="TimeBasedLog.%d{yyyy-MM-dd}.log"/>
+            <param name="activeFileName" value="appxDailyLog.log"/>
+        </rollingPolicy>
+
+        <param name="file" value="assets_receiver.log"/>
+        <param name="append" value="true"/>
+    </appender>
+
+    <root>
+        <priority value="all" />
+        <appender-ref ref="appxRollingAppenderDaily"/>
+    </root>
+
+ </log4j:configuration>
