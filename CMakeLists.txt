@@ -1,4 +1,4 @@
-PROJECT( AssetReceiver )
+PROJECT( AssetsReceiver )
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.0)
 
 
@@ -23,7 +23,7 @@ SET( CPP
     ${SOURCE_PATH}/util/str_ascii_helper.cpp
 )
 
-SET( EXE ReceiveAssetes )
+SET( EXE AssetsReceiver )
 
 
 ADD_EXECUTABLE(
