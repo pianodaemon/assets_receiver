@@ -29,11 +29,9 @@ class app_stand_alone
 {
     public:
 
-        app_stand_alone( const char* name );
+        app_stand_alone();
 
         virtual ~app_stand_alone();
-
-        const std::string get_app_name();
 
         //!=========================================================
         //!
@@ -78,12 +76,6 @@ class app_stand_alone
         //!
         virtual int start() = 0;
 
-    public:
-
-
-    private:
-
-        const char* m_app_name;
 };
 
 #endif  /* __AR_APP_STANDALONE_HPP__ */

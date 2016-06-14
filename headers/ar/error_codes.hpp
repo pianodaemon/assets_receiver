@@ -11,11 +11,11 @@
 //
 //======================================================================
 
-#ifndef __AR_ASSET_RECEIVER_HPP__
-#define __AR_ASSET_RECEIVER_HPP__
+#ifndef __AR_ASSET_RECEIVER_ERRORS_HPP__
+#define __AR_ASSET_RECEIVER_ERRORS_HPP__
 
 #define ASSET_RECEIVER_SUCCEED           0
 #define ASSET_RECEIVER_SYSTEM_ERROR     -1
 #define ASSET_RECEIVER_NOT_ENOUGH_ARGS  -2002
 
-#endif /* __AR_ASSET_RECEIVER_HPP__ */
+#endif /* __AR_ASSET_RECEIVER_ERRORS_HPP__ */

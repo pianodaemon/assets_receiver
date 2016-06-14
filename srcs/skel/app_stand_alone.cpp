@@ -18,7 +18,7 @@
 //! \brief
 //!     Class constructor.
 //!
-app_stand_alone::app_stand_alone( const char* name ) : m_app_name( name )
+app_stand_alone::app_stand_alone()
 {
 
 }
@@ -33,13 +33,6 @@ app_stand_alone::~app_stand_alone()
 }
 
 
-const std::string app_stand_alone::get_app_name()
-{
-    std::string name( this->m_app_name );
-    return name;
-}
-
-
 //!---------------------------------------------------------------------
 //! \brief
 //!     Standardize the skeleton of an algorithm in a base class
@@ -51,20 +44,20 @@ int app_stand_alone::exec()
 {
     int rc;
 
-    rc = this->run_logger();
+    rc = this->validate_params();
 
     if ( rc < APP_STAND_ALONE_SUCCEED )
     {
-        rc =  APP_STAND_ALONE_CANT_RUN_LOGGER;
+        rc = APP_STAND_ALONE_NOT_VALID_PARAMS;
     }
     else
     {
 
-        rc = this->validate_params();
+        rc = this->run_logger();
 
         if ( rc < APP_STAND_ALONE_SUCCEED )
         {
-            rc = APP_STAND_ALONE_NOT_VALID_PARAMS;
+            rc = APP_STAND_ALONE_CANT_RUN_LOGGER;
         }
         else
         {

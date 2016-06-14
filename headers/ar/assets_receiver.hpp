@@ -31,7 +31,7 @@ class assets_receiver : public app_stand_alone
         //! \brief
         //!     Class constructor.
         //!
-        assets_receiver( const char* appName , int argc , char **argv );
+        assets_receiver( const int argc , char **argv );
 
 
         //!=========================================================

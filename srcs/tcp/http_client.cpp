@@ -52,23 +52,22 @@ write_handler( void* contents, size_t size, size_t nmemb, void* user_ptr )
 extern int
 post_json_data( const char* url_ptr , char* data_ptr , size_t data_length , server_reply** sr_ptr )
 {
-    int rc = 0;
+    int rc = TCP_STUFF_SUCCEED;
 
-    if( sr_ptr == NULL )
+    if( sr_ptr == nullptr )
     {
-        rc = -3003;
+        rc = TCP_STUFF_ARG_NULL_PTR;
     }
     else
     {
         CURL*  curl = nullptr;
         CURLcode curl_rc;
 
-        curl_global_init( CURL_GLOBAL_ALL );
         curl = curl_easy_init();
 
         if ( curl == nullptr )
         {
-            rc = -3001;
+            rc = TCP_STUFF_CURL_FUCK_US;
         }
         else
         {
@@ -81,15 +80,14 @@ post_json_data( const char* url_ptr , char* data_ptr , size_t data_length , serv
             curl_easy_setopt( curl, CURLOPT_URL, url_ptr );
             curl_easy_setopt( curl, CURLOPT_USERAGENT, "libcurl-agent/1.0" );
             curl_easy_setopt( curl, CURLOPT_POST, 1L );
+
             curl_easy_setopt( curl, CURLOPT_WRITEDATA, (void *)&chunk );
             curl_easy_setopt( curl, CURLOPT_READDATA, &pooh );
 
-            curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, write_handler);
-
-
+            curl_easy_setopt( curl, CURLOPT_WRITEFUNCTION, write_handler );
             curl_easy_setopt( curl, CURLOPT_READFUNCTION, read_callback );
 
-            curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, pooh.sizeleft);
+            curl_easy_setopt( curl, CURLOPT_POSTFIELDSIZE, pooh.sizeleft );
 
             curl_rc = curl_easy_perform( curl );
 
@@ -99,7 +97,7 @@ post_json_data( const char* url_ptr , char* data_ptr , size_t data_length , serv
 
                 if( *sr_ptr == nullptr )
                 {
-                    rc = -1;
+                    rc = TCP_STUFF_SYSTEM_ERROR;
                 }
                 else
                 {
@@ -112,20 +110,19 @@ post_json_data( const char* url_ptr , char* data_ptr , size_t data_length , serv
                         sa->length = chunk.length;
                         sa->buffer = new char[ chunk.length ];
                         if( sa->buffer != nullptr ) memcpy( sa->buffer, chunk.buffer, chunk.length );
-                        else rc = -1;
+                        else rc = TCP_STUFF_SYSTEM_ERROR;
                     }
                 }
 
             }
             else
             {
-                rc = -3002;
+                rc = TCP_STUFF_CURL_FUCK_US;
             }
 
             free( chunk.buffer );
 
             curl_easy_cleanup( curl );
-            curl_global_cleanup();
         }
     }
 
@@ -138,5 +135,3 @@ server_reply_cleanup( struct server_reply* sr_ptr )
     delete[] sr_ptr->buffer;
     delete sr_ptr;
 }
-
-
