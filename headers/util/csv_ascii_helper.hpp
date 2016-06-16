@@ -23,10 +23,6 @@
 //! \brief
 //!    Reads an ASCII CSV file.
 //!
-//! \details
-//!    This function receives an array as buffer 
-//!    to store the random C string generated.
-//!
 //! \param [out]
 //!    row_handler   A row callback when a row is gotten.
 //!
