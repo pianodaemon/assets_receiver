@@ -22,6 +22,7 @@ SET( CPP
     ${SOURCE_PATH}/tcp/http_client.cpp
     ${SOURCE_PATH}/util/str_ascii_helper.cpp
     ${SOURCE_PATH}/util/csv_ascii_helper.cpp
+    ${SOURCE_PATH}/util/file_helper.cpp
 )
 
 SET( EXE AssetsReceiver )
