@@ -37,7 +37,7 @@
 //!    file          Relative or absolute path of csv file to read.
 //!
 //! \return
-//!    void
+//!    int           Any number less than zero is an error
 //!
 extern int
 read_csv( const char file[] , const char token , std::function<void(std::vector< std::string >&& v)> row_delegate );
