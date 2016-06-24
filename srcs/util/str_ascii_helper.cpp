@@ -1,4 +1,5 @@
 #include "util/str_ascii_helper.hpp"
+#include <cstring>
 #include <algorithm>
 #include <sstream>
 
@@ -66,3 +67,14 @@ rand_alpha_numeric( char* strout_ptr, const int len )
 
     strout_ptr[len] = 0;
 }
+
+extern void
+chomp(char *value)
+{
+    size_t have = strlen(value);
+    while ( have != 0 && (value[have - 1] == '\n' || value[have - 1] == '\r') )
+    {
+        value[--have] = '\0';
+    }
+}
+

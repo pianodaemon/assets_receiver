@@ -90,4 +90,16 @@ split( const std::string &s , char delim );
 extern void
 remove_code( char c , std::string &s );
 
+
+//!-------------------------------------------------------------------
+//! \brief
+//!    When the last element of a c ascii string is '\r' or '\n'
+//|    this function will replace so with an replace with '\0'.
+//|
+//! \return
+//!    void
+//!
+extern void
+chomp( char *value );
+
 #endif /* __UTIL_STR_ASCII_HELPER_HPP__ */
