@@ -14,48 +14,13 @@
 
 #include "ar/assets_receiver.hpp"
 #include "util/debug_tracer.hpp"
+#include "term-ui/inceptor.hpp"
 #include <curl/curl.h>
 #include <cstdlib>
 #include <iostream>
 #include <unistd.h>
 
 #define __LOG_CONFIG_FILE "log_config.xml"
-
-
-static int ncurses_ui_go( const char* app_name , const char* erp_user )
-{
-    int rc = ASSET_RECEIVER_SUCCEED;
-
-    enum scr_registry
-    {
-        SCR_MAIN_MENU,
-        SCR_RECV_MENU,
-        //SCR_RECV_ASN_STEP_LOCATION,
-        //SCR_RECV_ASN_STEP_SCAN,
-        
-    };
-
-    enum scr_registry current = SCR_MAIN_MENU;    
-
-    for(;;)
-    {
-        switch( current )
-        {
-            case SCR_MAIN_MENU:
-            {
-                
-                break;
-            }
-            case SCR_RECV_MENU:
-            {
-
-                break;
-            }
-        }
-    }
-
-    return rc;
-}
 
 assets_receiver::assets_receiver( const int argc, char **argv )
 {

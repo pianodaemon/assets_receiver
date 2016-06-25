@@ -1,11 +1,10 @@
-PROJECT( AssetsReceiver )
+PROJECT( ar )
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.0)
 
 
 
 INCLUDE_DIRECTORIES(
     headers
-    
 )
 
 #link_directories( ${Boost_LIBRARY_DIR} )
@@ -19,13 +18,14 @@ SET( CPP
     ${SOURCE_PATH}/main.cpp
     ${SOURCE_PATH}/skel/app_stand_alone.cpp
     ${SOURCE_PATH}/ar/assets_receiver.cpp
+    ${SOURCE_PATH}/term-ui/inceptor.cpp
     ${SOURCE_PATH}/tcp/http_client.cpp
     ${SOURCE_PATH}/util/str_ascii_helper.cpp
     ${SOURCE_PATH}/util/csv_ascii_helper.cpp
     ${SOURCE_PATH}/util/file_helper.cpp
 )
 
-SET( EXE AssetsReceiver )
+SET( EXE ar )
 
 
 ADD_EXECUTABLE(
