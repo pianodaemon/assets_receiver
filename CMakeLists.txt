@@ -19,6 +19,7 @@ SET( CPP
     ${SOURCE_PATH}/skel/app_stand_alone.cpp
     ${SOURCE_PATH}/ar/assets_receiver.cpp
     ${SOURCE_PATH}/term-ui/inceptor.cpp
+    ${SOURCE_PATH}/commons-ui/popup_windows.cpp
     ${SOURCE_PATH}/tcp/http_client.cpp
     ${SOURCE_PATH}/util/str_ascii_helper.cpp
     ${SOURCE_PATH}/util/csv_ascii_helper.cpp
@@ -36,6 +37,7 @@ ADD_EXECUTABLE(
 
 TARGET_LINK_LIBRARIES(
     ${EXE}
+    jsoncpp
     log4cxx
     curl
     ncurses
